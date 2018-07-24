@@ -1,0 +1,15 @@
+output: ExtractResult
+tasks:
+  Multiplier:
+    run: foreach
+      inputs:
+        foreach: [1,2,3,4,5]
+        do:
+          run: noop
+          inputs: "{ task().Inputs._item * 10 }"
+  SumofNumbers:
+    run: numbersum
+    inputs: 
+      body: "{ output('MultiplyNumbers') }"
+    requires:
+    - Multiplier
